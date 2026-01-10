@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16
+    container_name: authcore-db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: authcore-server
+    env_file:
+      - .env
+    volumes:
+      - ./server/ed25519_keys.txt:/keys/ed25519_keys.txt:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    restart: always
+
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: authcore-bot
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  pgdata:
