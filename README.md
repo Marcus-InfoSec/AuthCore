@@ -38,3 +38,13 @@ KEYS_FILE=/keys/ed25519_keys.txt
 docker-compose up -d
 ```
 7. api route: **"http://localhost/auth"**
+8. get SPKI key, copy, paste in client string
+```bash
+openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
+| openssl x509 -pubkey -noout \
+| openssl pkey -pubin -outform DER \
+| openssl dgst -sha256 -binary \
+| openssl base64
+```
+> [!WARNING]
+> AuthCore requires a valid domain name with HTTPS (SSL/TLS) enabled. Running the server on a raw IP address or without TLS is will break security.
