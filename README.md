@@ -50,4 +50,25 @@ openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/
 > AuthCore requires a valid domain name with HTTPS (SSL/TLS) enabled. Running the server on a raw IP address or without TLS is will break security.
 
 ### 💻 C#
+Example login with license key:
+```C#
+string hwid = AuthCore.GetHWID();
 
+Console.Write("\n\nEnter license: ");
+string licenseKey = Console.ReadLine();
+
+string serverUrl = "https://example.com";
+
+if (AuthCore.Authorize(licenseKey, hwid, serverUrl, out var authResult))
+{
+    Console.WriteLine("\nauth success!");
+    Console.WriteLine($"\nHWID: {hwid}");
+    Console.WriteLine($"\nexpires_at: {authResult.expires_at}");
+}
+else
+{
+    Console.WriteLine($"Status: {authResult?.message}");
+    Thread.Sleep(2500);
+    Environment.Exit(0);
+}
+```
