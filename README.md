@@ -12,3 +12,29 @@ AuthCore is a client–server authorization and licensing core designed to prote
 - 🤖 **Telegram bot** for license management
 
 ## 💦 Usage
+1. git clone repository
+```bash
+https://github.com/Marcus-InfoSec/AuthCore.git
+```
+2. rename .env.example -> .env, change fields
+```env
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=authcore
+DB_USER=changeme
+DB_PASSWORD=changeme
+
+BOT_TOKEN=12345:asdbcd
+ADMIN_ID=123456789
+
+SERVER_PORT=80
+KEYS_FILE=/keys/ed25519_keys.txt
+```
+3. run **[key_generate.py](https://github.com/Marcus-InfoSec/AuthCore/blob/main/Server/key_generate.py)**
+4. open **"AuthCore/Server/server/ed25519_keys.txt".** Copy second base64 string **(public key)**
+5. paste in client string.
+6. run docker:
+```bash
+docker-compose up -d
+```
+7. api route: **"http://localhost/auth"**
