@@ -48,3 +48,6 @@ openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/
 ```
 > [!WARNING]
 > AuthCore requires a valid domain name with HTTPS (SSL/TLS) enabled. Running the server on a raw IP address or without TLS is will break security.
+
+### 💻 C#
+
