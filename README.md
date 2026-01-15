@@ -14,7 +14,7 @@ AuthCore is a client–server authorization and licensing core designed to prote
 ## 💦 Usage
 1. git clone repository
 ```bash
-https://github.com/Marcus-InfoSec/AuthCore.git
+git clone https://github.com/Marcus-InfoSec/AuthCore.git
 ```
 2. rename .env.example -> .env, change fields
 ```env
